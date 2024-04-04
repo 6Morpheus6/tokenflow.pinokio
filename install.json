@@ -1,4 +1,8 @@
 {
+  "cmds": {
+      "nvidia": "pip install torch torchvision torchaudio xformers --index-url https://download.pytorch.org/whl/cu118",
+      "cpu": "pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu"
+    },
   "run": [
     {
       "method": "shell.run",
@@ -43,31 +47,7 @@
     {
       "method": "shell.enter",
       "params": {
-        "message": "npx --yes torchcraft@0.0.15",
-        "on": [
-          {
-            "event": null,
-            "return": true
-          }
-        ]
-      }
-    },
-    {
-      "method": "shell.enter",
-      "params": {
-        "message": "pip install -r torchcraft.txt",
-        "on": [
-          {
-            "event": null,
-            "return": true
-          }
-        ]
-      }
-    },
-    {
-      "method": "shell.enter",
-      "params": {
-        "message": "{{gpu === 'nvidia' ? 'pip install xformers==0.0.22.post4 --index-url https://download.pytorch.org/whl/cu118' : 'pip install xformers==0.0.22.post4'}}",
+        "message": "{{gpu === 'nvidia' ? 'self.cmds.nvidia' : 'self.cmds.cpu'}}",
         "on": [
           {
             "event": null,
